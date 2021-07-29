@@ -16,6 +16,7 @@ frame.add(gp);
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.setVisible(true);
 frame.setSize(Width, Length);
+frame.addKeyListener(gp);
 }
 public LeagueInvaders() {	
 	frame = new JFrame();
