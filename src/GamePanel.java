@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		}
 }
 public void startGame(){
-    alienSpawn = new Timer(1000 , ob);
+    alienSpawn = new Timer(600 , ob);
     alienSpawn.start();	
 }
 
@@ -63,6 +63,10 @@ public void startGame(){
 	}
 	void updateGameState() {  
 	ob.update();
+	if (!rocket.isActive) {
+	currentState = END;	
+	}
+	
 	}
 	void updateEndState()  {  
 		
@@ -83,7 +87,8 @@ public void startGame(){
 	void drawGameState(Graphics g) {  
 		g.drawImage(image, 0, 0, LeagueInvaders.Width, LeagueInvaders.Length, null);
 		ob.draw(g);
-
+		g.setColor(Color.GREEN);
+		g.drawString("Score: " + ob.getScore() + ".", 20, 20);
 	}
 	void drawEndState(Graphics g)  {  
 		g.setColor(Color.RED);
@@ -122,18 +127,21 @@ public void startGame(){
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-		    if (currentState == END) {   
-		    	currentState = MENU;
+			if (currentState == END) {   
+				rocket = new Rocketship(250,700,50,50);
+				 ob = new ObjectManager(rocket);
+				currentState = MENU;
 		    }
-		    if (currentState == MENU) {
-		    	currentState = GAME;
+			else if (currentState == MENU) {
+		    	
+				currentState = GAME;
 		    	startGame();
-		    	if (e.getKeyCode() == VK.SPACE) {
-		    	ob.addProjectile(rocket.getProjectile());
-			}}
-		    if(currentState == GAME) {
+			}
+			else if(currentState == GAME) {
 		       currentState = END;
 		    }
+			
+			
 		   
 		    
 		}  
@@ -150,7 +158,11 @@ public void startGame(){
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 			 rocket.left=true;
 	    }
-		
+		if (currentState == GAME) {
+			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		    	ob.addprojectile(rocket.getProjectile());
+			}
+		}
 	}
 
 	@Override

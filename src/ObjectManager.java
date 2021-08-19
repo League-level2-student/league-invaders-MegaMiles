@@ -7,13 +7,35 @@ import java.util.Random;
 
 public class ObjectManager implements ActionListener{
 	Rocketship rocket;
+	int score = 0;
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random = new Random();
 public ObjectManager(Rocketship rocket) {
 	this.rocket = rocket;
-	addAlien();
+	
 }
+public int getScore() {
+	return score;
+}
+public void checkCollision() {
+	for (int i = aliens.size()-1; i > -1; i--) {
+		if (rocket.collisionbox.intersects(aliens.get(i).collisionbox)) {
+		aliens.get(i).isActive = false;
+		rocket.isActive = false;
+		}
+		for (int j = 0; j < projectiles.size(); j++) {
+		if (projectiles.get(j).collisionbox.intersects(aliens.get(i).collisionbox)) {
+			score++;
+			aliens.get(i).isActive = false;
+		}
+		}
+	}
+
+}
+ public void addprojectile(Projectile p) {
+projectiles.add(p);	 
+ }
 public void addAlien() {
 	aliens.add(new Alien(random.nextInt(LeagueInvaders.Width),0,50,50));
 }
@@ -30,6 +52,8 @@ public void update() {
 			projectiles.get(i).isActive = false;
 		}
 	}
+	checkCollision();
+	purgeObjects();
 	rocket.update();
 }
 public void draw(Graphics g) {
@@ -58,8 +82,7 @@ for (int i = projectiles.size()-1; i > -1; i--) {
 }
 @Override
 public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-	
+	addAlien();
 }
 
 
