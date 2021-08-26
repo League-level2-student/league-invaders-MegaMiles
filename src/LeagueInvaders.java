@@ -12,6 +12,7 @@ leagueinv.setup();
 
 }
 public void setup() {
+frame.addMouseListener(gp);	
 frame.add(gp);
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.setVisible(true);
@@ -21,7 +22,6 @@ frame.addKeyListener(gp);
 public LeagueInvaders() {	
 	frame = new JFrame();
 	gp = new GamePanel();
-
 }
 }
 

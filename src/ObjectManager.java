@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class ObjectManager implements ActionListener{
 	Rocketship rocket;
-	int score = 0;
+	
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random = new Random();
@@ -15,9 +15,7 @@ public ObjectManager(Rocketship rocket) {
 	this.rocket = rocket;
 	
 }
-public int getScore() {
-	return score;
-}
+
 public void checkCollision() {
 	for (int i = aliens.size()-1; i > -1; i--) {
 		if (rocket.collisionbox.intersects(aliens.get(i).collisionbox)) {
@@ -26,7 +24,7 @@ public void checkCollision() {
 		}
 		for (int j = 0; j < projectiles.size(); j++) {
 		if (projectiles.get(j).collisionbox.intersects(aliens.get(i).collisionbox)) {
-			score++;
+			GamePanel.score++;
 			aliens.get(i).isActive = false;
 		}
 		}
