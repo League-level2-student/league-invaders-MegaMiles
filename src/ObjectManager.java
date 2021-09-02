@@ -31,6 +31,7 @@ public void checkCollision() {
 	}
 
 }
+
  public void addprojectile(Projectile p) {
 projectiles.add(p);	 
  }

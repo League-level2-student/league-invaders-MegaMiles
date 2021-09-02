@@ -8,6 +8,7 @@ public class Alien extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
+	static int MolassesLevel = 0;
 	public Alien(int x, int y, int width, int height){
 		super(x,y,width,height);
 		speed = 5;
@@ -27,7 +28,7 @@ public class Alien extends GameObject{
 	    }
 	}
 	public void update() {
-	y+=speed;
+	y+=speed - MolassesLevel;
 	 super.update();
 	}
 	void draw(Graphics g) {

@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -27,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	static int score = 0;
 	Rocketship rocket = new Rocketship(250,700,50,50);
 	ObjectManager ob = new ObjectManager(rocket);
+	ArrayList<Button> buttons = new ArrayList<Button>();
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
@@ -43,6 +46,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 public int getScore() {
 	return score;
+	
 }
 
 public void startGame(){
@@ -56,7 +60,11 @@ public void startGame(){
 		 italic = new Font("New Times Roman", Font.ITALIC, 35);
 		 frameDraw = new Timer(1000/60,this);
 		    frameDraw.start(); 
-		loadImage("space.png");  
+		loadImage("space.png");
+		buttons.add(new Button(60, 170, 190, 240, new Color(97, 49, 12), "Molasses"));
+		buttons.add(new Button(250, 170, 190, 240, new Color(138, 158, 22), "Hyperdrive Module"));
+		buttons.add(new Button(60, 410, 190, 240, Color.black, "Sharper Projectiles"));
+		buttons.add(new Button(250, 410, 190, 240, Color.red, "Force Field"));
 	}
 	  void loadImage(String imageFile) {
 	        if (needImage) {
@@ -97,10 +105,26 @@ public void startGame(){
 		g.setFont(smallerfont);
 		g.setColor(Color.GREEN);
 		g.drawString("Score: " + getScore() + ".", 20, 20);
-		g.setColor(Color.pink);
-		g.fillRect(60, 170, 190, 250);
-		g.setColor(Color.green);
-		g.fillRect(250, 170, 190, 250);
+//		g.setColor(new Color(97, 49, 12));
+//		g.fillRect(60, 170, 190, 240);
+//		//alien slowness " deploy mollases"
+//		g.setColor(new Color(138, 158, 22));
+//		g.fillRect(250, 170, 190, 240);
+//		//spaceship speed "hyperdrive module"
+//		g.setColor(Color.black);
+//		g.fillRect(60, 410, 190, 240);
+//		//projectile piercing "sharper projectiles"
+//		g.setColor(Color.red);
+//		g.fillRect(250, 410, 190, 240);
+//		//extra life "force field"
+		for (int i = 0; i < buttons.size(); i++) {
+		buttons.get(i).draw(g);	
+		}
+		g.setFont(smallerfont);
+		g.setColor(Color.WHITE);
+		g.drawString("Molasses", 112, 220);
+		
+		
 		
 		System.out.println("60, 170, 380, 250");
 	}
@@ -132,6 +156,7 @@ public void startGame(){
 	
 	public void GameReset() {
 	score = 0;	
+	Alien.MolassesLevel = 0;
 	}
 
 	@Override
@@ -206,8 +231,16 @@ public void startGame(){
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+	for (int i = 0; i < buttons.size(); i++) {
+	Button currentButton = buttons.get(i);	
 		
+	if (currentButton.isClicked(e.getX(), e.getY())) {
+	//molasses
+	if (currentButton.Powerup.equals("Molasses")) {
+	Alien.MolassesLevel++;	
+	}	
+	}	
+	}		
 	}
 
 	@Override
