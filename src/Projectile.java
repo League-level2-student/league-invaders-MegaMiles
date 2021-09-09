@@ -8,8 +8,11 @@ public class Projectile extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
-	public Projectile(int x, int y, int width, int height){
+	static int Projectile_Durability = 1;
+	int Remaining_Durability;
+	public Projectile(int x, int y, int width, int height, int Remaining_Durability){
 		super(x,y,width,height);
+		this.Remaining_Durability = Remaining_Durability;
 		speed = 10;
 		if (needImage) {
 		    loadImage ("bullet.png");

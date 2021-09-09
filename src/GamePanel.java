@@ -64,7 +64,7 @@ public void startGame(){
 		buttons.add(new Button(60, 170, 190, 240, new Color(97, 49, 12), "Molasses"));
 		buttons.add(new Button(250, 170, 190, 240, new Color(138, 158, 22), "Hyperdrive Module"));
 		buttons.add(new Button(60, 410, 190, 240, Color.black, "Sharper Projectiles"));
-		buttons.add(new Button(250, 410, 190, 240, Color.red, "Force Field"));
+		buttons.add(new Button(250, 410, 190, 240, new Color(128, 4, 4), "Force Field"));
 	}
 	  void loadImage(String imageFile) {
 	        if (needImage) {
@@ -123,10 +123,12 @@ public void startGame(){
 		g.setFont(smallerfont);
 		g.setColor(Color.WHITE);
 		g.drawString("Molasses", 112, 220);
-		
-		
-		
-		System.out.println("60, 170, 380, 250");
+		g.setFont(smallerfont);
+		g.setColor(Color.WHITE);
+		g.drawString("Hyperdrive", 293, 220);
+		g.setFont(smallerfont);
+		g.setColor(Color.WHITE);
+		g.drawString("Sharper Projectiles", 67, 465);
 	}
 	void drawGameState(Graphics g) {  
 		g.drawImage(image, 0, 0, LeagueInvaders.Width, LeagueInvaders.Length, null);
@@ -157,6 +159,7 @@ public void startGame(){
 	public void GameReset() {
 	score = 0;	
 	Alien.MolassesLevel = 0;
+	Rocketship.Hyperspeed = 0;
 	}
 
 	@Override
@@ -239,6 +242,13 @@ public void startGame(){
 	if (currentButton.Powerup.equals("Molasses")) {
 	Alien.MolassesLevel++;	
 	}	
+	if (currentButton.Powerup.equals("Hyperdrive Module")) {
+		Rocketship.Hyperspeed++;	
+		}
+	if (currentButton.Powerup.equals("Sharper Projectiles")) {
+		Projectile.Projectile_Durability++;
+		}
+	
 	}	
 	}		
 	}
