@@ -28,8 +28,8 @@ public class Button extends GameObject{
 			    if (Powerup.equals("Sharper Projectiles")) {
 				    loadImage ("Projectile.png");	
 					}
-			    if (Powerup.equals("Molasses")) {
-				    loadImage ("Molasses.png");	
+			    if (Powerup.equals("Extra Life")) {
+				    loadImage ("Pixelheart.png");	
 					}
 			}
 		 
@@ -57,6 +57,9 @@ void loadImage(String imageFile) {
 		}
 		if(Powerup.equals("Sharper Projectiles")) {
 		g.drawImage(image, 90, 491, 130, 95, null);
+		}
+		if(Powerup.equals("Extra Life")) {
+		g.drawImage(image, 282, 488, 130, 95, null);
 		}
 	}
 	

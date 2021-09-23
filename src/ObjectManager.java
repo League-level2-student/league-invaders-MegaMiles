@@ -17,15 +17,23 @@ public ObjectManager(Rocketship rocket) {
 }
 
 public void checkCollision() {
+	
 	for (int i = aliens.size()-1; i > -1; i--) {
 		if (rocket.collisionbox.intersects(aliens.get(i).collisionbox)) {
 		aliens.get(i).isActive = false;
+		rocket.Lives_Remaining --;
+		if(rocket.Lives_Remaining == 0)
 		rocket.isActive = false;
 		}
 		for (int j = 0; j < projectiles.size(); j++) {
 		if (projectiles.get(j).collisionbox.intersects(aliens.get(i).collisionbox)) {
 			GamePanel.score++;
 			aliens.get(i).isActive = false;
+			projectiles.get(j).Remaining_Durability --;
+			
+			if(projectiles.get(j).Remaining_Durability == 0) {
+				projectiles.get(j).isActive = false;
+			}
 		}
 		}
 	}

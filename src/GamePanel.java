@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Timer frameDraw;
 	Timer alienSpawn;
 	static int score = 0;
-	Rocketship rocket = new Rocketship(250,700,50,50);
+	Rocketship rocket = new Rocketship(250,700,50,50,Rocketship.Lives_Amount);
 	ObjectManager ob = new ObjectManager(rocket);
 	ArrayList<Button> buttons = new ArrayList<Button>();
 	public static BufferedImage image;
@@ -64,7 +64,7 @@ public void startGame(){
 		buttons.add(new Button(60, 170, 190, 240, new Color(97, 49, 12), "Molasses"));
 		buttons.add(new Button(250, 170, 190, 240, new Color(138, 158, 22), "Hyperdrive Module"));
 		buttons.add(new Button(60, 410, 190, 240, Color.black, "Sharper Projectiles"));
-		buttons.add(new Button(250, 410, 190, 240, new Color(128, 4, 4), "Force Field"));
+		buttons.add(new Button(250, 410, 190, 240, new Color(128, 4, 4), "Extra Life"));
 	}
 	  void loadImage(String imageFile) {
 	        if (needImage) {
@@ -104,7 +104,8 @@ public void startGame(){
 		g.drawString("press ENTER to start", 136, 700);
 		g.setFont(smallerfont);
 		g.setColor(Color.GREEN);
-		g.drawString("Score: " + getScore() + ".", 20, 20);
+		g.drawString("Score: " + getScore(), 25, 25);
+		g.drawString("Lifes: " + Rocketship.Lives_Amount, 410, 25);
 //		g.setColor(new Color(97, 49, 12));
 //		g.fillRect(60, 170, 190, 240);
 //		//alien slowness " deploy mollases"
@@ -129,12 +130,16 @@ public void startGame(){
 		g.setFont(smallerfont);
 		g.setColor(Color.WHITE);
 		g.drawString("Sharper Projectiles", 67, 465);
+		g.setFont(smallerfont);
+		g.setColor(Color.WHITE);
+		g.drawString("Extra Life", 300, 465);
 	}
 	void drawGameState(Graphics g) {  
 		g.drawImage(image, 0, 0, LeagueInvaders.Width, LeagueInvaders.Length, null);
 		ob.draw(g);
 		g.setColor(Color.GREEN);
-		g.drawString("Score: " + getScore() + ".", 20, 20);
+		g.drawString("Score: " + getScore(), 20, 20);
+		g.drawString("Lifes: " + rocket.Lives_Remaining, 410, 25);
 	}
 	void drawEndState(Graphics g)  {  
 		g.drawImage(image, 0, 0, LeagueInvaders.Width, LeagueInvaders.Length, null);
@@ -160,6 +165,9 @@ public void startGame(){
 	score = 0;	
 	Alien.MolassesLevel = 0;
 	Rocketship.Hyperspeed = 0;
+	Rocketship.Lives_Amount = 1;
+	rocket.Lives_Remaining = 1;
+	Projectile.Projectile_Durability = 1;
 	}
 
 	@Override
@@ -178,7 +186,7 @@ public void startGame(){
 				currentState = MENU;
 		    }
 			else if (currentState == MENU) {
-				rocket = new Rocketship(250,700,50,50);
+				rocket = new Rocketship(250,700,50,50,Rocketship.Lives_Amount);
 				 ob = new ObjectManager(rocket);
 				currentState = GAME;
 		    	startGame();
@@ -239,15 +247,29 @@ public void startGame(){
 		
 	if (currentButton.isClicked(e.getX(), e.getY())) {
 	//molasses
+		
+		
 	if (currentButton.Powerup.equals("Molasses")) {
-	Alien.MolassesLevel++;	
-	}	
+		if(score >= Alien.alien_score_price ) {
+		Alien.MolassesLevel++;	
+		score -=5;
+		}}
+	
+	
 	if (currentButton.Powerup.equals("Hyperdrive Module")) {
 		Rocketship.Hyperspeed++;	
 		}
+	
+	
 	if (currentButton.Powerup.equals("Sharper Projectiles")) {
 		Projectile.Projectile_Durability++;
 		}
+	
+	
+	if (currentButton.Powerup.equals("Extra Life")) {
+		Rocketship.Lives_Amount++;
+		}
+	
 	
 	}	
 	}		

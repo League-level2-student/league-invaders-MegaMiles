@@ -13,8 +13,11 @@ public class Rocketship extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
-	public Rocketship(int x, int y, int width, int height){
+	static int Lives_Amount = 1;
+	int Lives_Remaining;
+	public Rocketship(int x, int y, int width, int height, int Lives_Remaining){
 		super(x,y,width,height);
+		this.Lives_Remaining = Lives_Remaining;
 		speed = 7;
 		if (needImage) {
 		    loadImage ("rocket.png"); 

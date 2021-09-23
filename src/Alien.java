@@ -9,8 +9,10 @@ public class Alien extends GameObject{
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	static int MolassesLevel = 0;
+	static int alien_score_price = 5;
 	public Alien(int x, int y, int width, int height){
 		super(x,y,width,height);
+		
 		speed = 5;
 		if (needImage) {
 		    loadImage ("Alien.png");
