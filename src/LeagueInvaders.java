@@ -1,8 +1,8 @@
 import javax.swing.JFrame;
 
 public class LeagueInvaders {
-	public static final int Width = 500;
-	public static final int Length = 800;
+	public static final int WIDTH = 500;
+	public static final int LENGTH = 800;
 	JFrame frame;
 	GamePanel gp;
 
@@ -16,7 +16,7 @@ frame.addMouseListener(gp);
 frame.add(gp);
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.setVisible(true);
-frame.setSize(Width, Length);
+frame.setSize(WIDTH, LENGTH);
 frame.addKeyListener(gp);
 }
 public LeagueInvaders() {	

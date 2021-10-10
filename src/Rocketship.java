@@ -15,6 +15,10 @@ public class Rocketship extends GameObject {
 	public static boolean gotImage = false;
 	static int Lives_Amount = 1;
 	int Lives_Remaining;
+	static int rocketship_score_price = 10;
+	static int lives_score_price = 20;
+	static int Hyperspeed_Bought = 0;
+	static int ExtraLife_Bought = 0;
 	public Rocketship(int x, int y, int width, int height, int Lives_Remaining){
 		super(x,y,width,height);
 		this.Lives_Remaining = Lives_Remaining;

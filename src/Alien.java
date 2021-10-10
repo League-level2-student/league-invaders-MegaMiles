@@ -5,11 +5,13 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Alien extends GameObject{
-	public static BufferedImage image;
-	public static boolean needImage = true;
-	public static boolean gotImage = false;
+	public BufferedImage image;
+	public boolean needImage = true;
+	public boolean gotImage = false;
 	static int MolassesLevel = 0;
-	static int alien_score_price = 5;
+	static int alien_score_price = 10;
+	static int Molasses_Bought = 0;
+	
 	public Alien(int x, int y, int width, int height){
 		super(x,y,width,height);
 		
@@ -31,6 +33,7 @@ public class Alien extends GameObject{
 	}
 	public void update() {
 	y+=speed - MolassesLevel;
+	
 	 super.update();
 	}
 	void draw(Graphics g) {

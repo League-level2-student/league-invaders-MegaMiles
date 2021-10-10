@@ -10,6 +10,8 @@ public class Projectile extends GameObject{
 	public static boolean gotImage = false;
 	static int Projectile_Durability = 1;
 	int Remaining_Durability;
+	static int projectile_score_price = 15;
+	static int Projectile_Bought = 0;
 	public Projectile(int x, int y, int width, int height, int Remaining_Durability){
 		super(x,y,width,height);
 		this.Remaining_Durability = Remaining_Durability;

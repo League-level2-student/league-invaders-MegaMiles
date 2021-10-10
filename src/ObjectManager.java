@@ -22,8 +22,6 @@ public void checkCollision() {
 		if (rocket.collisionbox.intersects(aliens.get(i).collisionbox)) {
 		aliens.get(i).isActive = false;
 		rocket.Lives_Remaining --;
-		if(rocket.Lives_Remaining == 0)
-		rocket.isActive = false;
 		}
 		for (int j = 0; j < projectiles.size(); j++) {
 		if (projectiles.get(j).collisionbox.intersects(aliens.get(i).collisionbox)) {
@@ -40,19 +38,41 @@ public void checkCollision() {
 
 }
 
- public void addprojectile(Projectile p) {
+ public void addprojectile(Projectile p) {                                                                                           
 projectiles.add(p);	 
  }
-public void addAlien() {
-	aliens.add(new Alien(random.nextInt(LeagueInvaders.Width),0,50,50));
+public void addAlien() {	
+	int alienSelector = random.nextInt(Rocketship.ExtraLife_Bought+1);	
+if (alienSelector == 0) {
+aliens.add(new Alien(random.nextInt(401)+50,0, 50, 50));
+}
+if (alienSelector == 1) {
+aliens.add(new DiagonalAlien(random.nextInt(401)+50,0, 50, 50));	
+}
+if (alienSelector == 2) {
+aliens.add(new ShootingAlien(random.nextInt(401)+50,0, 50, 50));			
+}
+if (alienSelector == 3) {
+aliens.add(new TankAlien(random.nextInt(401)+50,0, 50, 50));		
+}
+	
+	
+	
+	
 }
 public void update() {
 	for (int i = 0; i < aliens.size(); i++) {
 		aliens.get(i).update();
-		if (aliens.get(i).y >= LeagueInvaders.Length) {
+		if (aliens.get(i).y >= LeagueInvaders.LENGTH) {
+			rocket.Lives_Remaining --;
 			aliens.get(i).isActive = false;
+			
 		}
 	}
+	if(rocket.Lives_Remaining <= 0) {
+		rocket.isActive = false;
+	}
+	
 	for (int i = 0; i < projectiles.size(); i++) {
 		projectiles.get(i).update();
 		if (projectiles.get(i).y <= 0) {
