@@ -1,14 +1,14 @@
 import java.util.Random;
 
 public class DiagonalAlien extends Alien{
-	int xSpeed = 3;
+	int xSpeed = 2;
 	Random ran = new Random();
 	public DiagonalAlien(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		needImage = true;
 		gotImage = false;
 if (ran.nextBoolean()) {
-xSpeed = -3;	
+xSpeed = -2;	
 }	
 		if (needImage) {
 		    loadImage ("DiagonalAlien.png");

@@ -171,7 +171,6 @@ public void startGame(){
 		}
 		
 		repaint();
-		System.out.println(Projectile.Projectile_Durability );
 	}
 	
 	public void GameReset() {
@@ -220,7 +219,9 @@ public void startGame(){
 		   
 		    
 		}
-		
+		if (e.getKeyCode() == KeyEvent.VK_C) {
+		score += 200;	
+		}
 		
 		
 		
@@ -239,7 +240,7 @@ public void startGame(){
 	    }
 		if (currentState == GAME) {
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-		    	ob.addprojectile(rocket.getProjectile());
+		    	ob.addprojectile(rocket.getProjectile());		    	
 }}}
 	@Override
 	public void keyReleased(KeyEvent e) {

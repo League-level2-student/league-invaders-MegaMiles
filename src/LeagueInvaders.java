@@ -5,7 +5,8 @@ public class LeagueInvaders {
 	public static final int LENGTH = 800;
 	JFrame frame;
 	GamePanel gp;
-
+ 
+	
 public static void main(String[] args) {
 LeagueInvaders leagueinv = new LeagueInvaders();
 leagueinv.setup();
@@ -25,3 +26,4 @@ public LeagueInvaders() {
 }
 }
 
+  
